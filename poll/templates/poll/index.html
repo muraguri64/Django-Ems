@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-5">
+      <h3>List of {{ title }}</h3>
+      <div>
+        {% if questions %}
+          <ul>
+              {% for question in questions %}
+                <li><a href="{% url 'poll_details' question.id %}">{{ question.title }}</a></li>
+              {% endfor %}
+          </ul>
+        {% else %}
+          <p><b>There are no questions available!</b></p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+
+
+{% endblock %}

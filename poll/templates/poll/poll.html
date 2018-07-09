@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-md-3"><h3>Vote Page</h3></div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+
+      <div>
+        <h4>{{ question.title }}</h4>
+        {% if question.choices %}
+
+          <form action="{% url 'poll_answer' question.id %}" method="POST">
+            {% csrf_token %}
+            {% for choice in question.choices %}
+              <div class="form-check-inline">
+                <label class="form-check-label" for="radio1">
+                  <input type="radio" class="form-check-input" id="{{ choice.id }}" name="answer" value="{{ choice.id }}">{{choice.text}}
+                </label>
+              </div>
+            {%endfor %}
+
+
+
+            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+          </form>
+
+        {% endif %}
+
+        <p>Poll is created by {{ question.created_by.username }}</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+{% endblock %}
